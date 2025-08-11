@@ -1,222 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ShopSphere – Everything You Need,  Just Click</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #000808;
-      color: #f3e8e8;
-      padding: 20px;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #001f3f, #003366);
+        color: white;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
     }
 
-    h1 {
-      color: #fdffff;
-      font-size: 40px;
+    .contact-container {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 30px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
     }
 
-    h2 {
-      color: #8afff3;
-      font-size: 24px;
-      margin-bottom: 10px;
+    .contact-container h2 {
+        color: #00bfff;
+        margin-bottom: 20px;
+        font-weight: 600;
     }
 
-    p {
-      font-size: 16px;
-      margin: 10px 0;
+    label {
+        font-weight: 600;
+        display: block;
+        margin: 15px 0 5px;
     }
 
-    .product-gallery img {
-      margin: 10px;
-      border: 2px solid #f6f4f4;
-      border-radius: 5px;
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 1em;
+        box-sizing: border-box; /* Fix alignment overflow */
     }
 
-    ul {
-      list-style-type: disc;
-      margin-left: 20px;
-    }
-
-    a {
-      color: #a3df43;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+    textarea {
+        resize: none;
+        height: 120px;
     }
 
     button {
-      background-color: #f4711a;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 15px;
-      cursor: pointer;
-      border-radius: 5px;
+        background-color: #00bfff;
+        color: white;
+        padding: 12px 18px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        font-weight: 600;
+        margin-top: 15px;
+        cursor: pointer;
+        transition: 0.3s ease;
     }
 
     button:hover {
-      background-color: #d2c9c3;
+        background-color: #008ccc;
     }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #9cf987;
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Main Heading -->
-  <h1>Welcome to ShopSphere</h1>
-  <h2>Everything You Need, Just  Click</h2>
+<div class="contact-container">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-  <!-- Introduction Paragraph -->
-  <p>ShopSphere is your one-stop destination for electronics, fashion, home essentials, and much more. Browse our top deals and trending categories below.</p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-  <!-- Images Section -->
-  <h3>Featured Products</h3>
-  <div class="product-gallery">
-    <img src="C:\Users\dhars\Downloads\watch-removebg-preview.png" alt="Smart Watch">
-    <img src="C:\Users\dhars\Downloads\airbuds-removebg-preview.png" alt="Bluetooth Earbuds">
-    <img src="C:\Users\dhars\Downloads\wildeyy-removebg-preview.png" alt="Stylish Backpack">
-  </div>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
 
-  <!-- Links Section -->
-  <h3>Explore More:</h3>
-  <ul>
-    <li><a href="https://www.amazon.in" target="_blank">Shop on Amazon</a></li>
-    <li><a href="https://www.flipkart.com" target="_blank">Shop on Flipkart</a></li>
-    <li><a href="#">Visit Our Full Website</a></li>
-  </ul>
+        <button type="submit">Send Message</button>
+    </form>
+</div>
 
-  <!-- JavaScript Button -->
-  <button onclick="showMessage()">Click Me!</button>
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-  <!-- Footer Text -->
-  <p class="footer">© 2025 ShopSphere. All rights reserved.</p>
+        if (name === '' || email === '' || message === '') {
+            alert('Please fill in all fields.');
+            return;
+        }
 
-  <script>
-    function showMessage() {
-      alert("Welcome to ShopSphere! Happy Shopping 🛍️");
-    }
-  </script>
+        if (!email.match(emailPattern)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
 
-</body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>ShopSphere – Everything You Need,  Just Click</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #000808;
-      color: #f3e8e8;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #fdffff;
-      font-size: 40px;
-    }
-
-    h2 {
-      color: #8afff3;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 16px;
-      margin: 10px 0;
-    }
-
-    .product-gallery img {
-      margin: 10px;
-      border: 2px solid #f6f4f4;
-      border-radius: 5px;
-    }
-
-    ul {
-      list-style-type: disc;
-      margin-left: 20px;
-    }
-
-    a {
-      color: #a3df43;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    button {
-      background-color: #f4711a;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 15px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    button:hover {
-      background-color: #d2c9c3;
-    }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #9cf987;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Main Heading -->
-  <h1>Welcome to ShopSphere</h1>
-  <h2>Everything You Need, Just  Click</h2>
-
-  <!-- Introduction Paragraph -->
-  <p>ShopSphere is your one-stop destination for electronics, fashion, home essentials, and much more. Browse our top deals and trending categories below.</p>
-
-  <!-- Images Section -->
-  <h3>Featured Products</h3>
-  <div class="product-gallery">
-    <img src="C:\Users\dhars\Downloads\watch-removebg-preview.png" alt="Smart Watch">
-    <img src="C:\Users\dhars\Downloads\airbuds-removebg-preview.png" alt="Bluetooth Earbuds">
-    <img src="C:\Users\dhars\Downloads\wildeyy-removebg-preview.png" alt="Stylish Backpack">
-  </div>
-
-  <!-- Links Section -->
-  <h3>Explore More:</h3>
-  <ul>
-    <li><a href="https://www.amazon.in" target="_blank">Shop on Amazon</a></li>
-    <li><a href="https://www.flipkart.com" target="_blank">Shop on Flipkart</a></li>
-    <li><a href="#">Visit Our Full Website</a></li>
-  </ul>
-
-  <!-- JavaScript Button -->
-  <button onclick="showMessage()">Click Me!</button>
-
-  <!-- Footer Text -->
-  <p class="footer">© 2025 ShopSphere. All rights reserved.</p>
-
-  <script>
-    function showMessage() {
-      alert("Welcome to ShopSphere! Happy Shopping 🛍️");
-    }
-  </script>
+        alert('Form submitted successfully!');
+        this.reset();
+    });
+</script>
 
 </body>
 </html>
-

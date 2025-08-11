@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0077b6, #00b4d8, #90e0ef);
+        color: white;
+    }
+
+    /* ===== Navigation ===== */
+    nav {
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+        backdrop-filter: blur(6px);
+    }
+    nav .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffdd59;
+    }
+    nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    nav ul li {
+        margin-left: 25px;
+    }
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+        color: #ffdd59;
+    }
+
+    /* ===== To-Do Container ===== */
+    .todo-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        box-shadow: 0px 6px 20px rgba(0,0,0,0.4);
+    }
+    h2 {
+        text-align: center;
+        color: #ffdd59;
+    }
+    .input-section {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    input {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+    button {
+        background: linear-gradient(90deg, #ffdd59, #f9a825);
+        color: black;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 12px 16px;
+        transition: transform 0.2s ease;
+    }
+    button:hover {
+        transform: scale(1.05);
+    }
+
+    /* ===== Task List ===== */
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        background: rgba(255, 255, 255, 0.15);
+        margin-bottom: 10px;
+        padding: 12px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s ease;
+    }
+    li:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+    .delete-btn {
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+    }
+    .delete-btn:hover {
+        background: #ff1a1a;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+        .input-section {
+            flex-direction: column;
+        }
+        button {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">ShopSphere</div>
+    <ul>
+        <li><a href="CF.html">Contact</a></li>
+        <li><a href="todo.html">Todo</a></li>
+    </ul>
+</nav>
+
+<div class="todo-container">
+    <h2>My To-Do List</h2>
+    <div class="input-section">
+        <input type="text" id="taskInput" placeholder="Enter a new task">
+        <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+function addTask() {
+    let taskInput = document.getElementById("taskInput");
+    let taskValue = taskInput.value.trim();
+
+    if (taskValue === "") {
+        alert("Please enter a task.");
+        return;
+    }
+
+    let li = document.createElement("li");
+    li.textContent = taskValue;
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.onclick = function () {
+        li.remove();
+    };
+
+    li.appendChild(deleteBtn);
+    document.getElementById("taskList").appendChild(li);
+    taskInput.value = "";
+}
+</script>
+
+</body>
+</html>
