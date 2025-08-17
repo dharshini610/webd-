@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Frontend Project</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header, footer { background-color: #333; color: white; text-align: center; padding: 1rem; }
+    main { padding: 1rem; }
+
+    .carousel-container, .api-container {
+      margin: 1rem 0; padding: 1rem;
+      border: 1px solid #ccc; border-radius: 8px; text-align: center;
+    }
+
+    .carousel { position: relative; display: inline-block; }
+    .carousel img { width: 100%; max-width: 600px; border-radius: 8px; }
+    .carousel button {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5); color: white; border: none;
+      padding: 0.5rem 1rem; cursor: pointer;
+    }
+    #prev { left: 0; } #next { right: 0; }
+
+    .caption { margin-top: 0.5rem; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      body { font-size: 14px; }
+      .carousel img { max-width: 100%; }
+    }
+    @media (max-width: 480px) { body { font-size: 12px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Interactive Frontend Project</h1>
+  </header>
+
+  <main>
+    <!-- Image Carousel -->
+    <section class="carousel-container">
+      <h2>Weather Image Carousel</h2>
+      <div class="carousel">
+        <button id="prev" aria-label="Previous image">❮</button>
+        <img id="carousel-image" src="" alt="Weather image" />
+        <button id="next" aria-label="Next image">❯</button>
+      </div>
+      <p id="caption" class="caption" aria-live="polite"></p>
+    </section>
+
+    <!-- API Data -->
+    <section class="api-container">
+      <h2>Weather API</h2>
+      <input type="text" id="city" placeholder="Enter city name" />
+      <button id="fetch-btn">Get Weather</button>
+      <div id="weather-output"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Project</p>
+  </footer>
+
+  <script>
+    // Weather-themed images (guaranteed weather via keywords)
+    const images = [
+      "C:/Users/dhars/Downloads/snowy.jpg",
+      "C:/Users/dhars/Downloads/windy.jpg",
+      "C:/Users/dhars/Downloads/cloudy.jpg",
+      "C:/Users/dhars/Downloads/Sunny.jpg",
+      "C:/Users/dhars/Downloads/Rainy.jpg"
+    ];
+    const labels = ["Sunny", "Rainy", "Cloudy", "Stormy", "Snowy"];
+
+    let currentIndex = 0;
+    const carouselImage = document.getElementById("carousel-image");
+    const caption = document.getElementById("caption");
+
+    function render() {
+      carouselImage.src = images[currentIndex];
+      carouselImage.alt = labels[currentIndex] + " weather";
+      caption.textContent = labels[currentIndex] + " weather";
+    }
+
+    document.getElementById("next").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      render();
+    });
+
+    document.getElementById("prev").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      render();
+    });
+
+    // Initialize first image as weather-themed
+    render();
+
+    // Weather API (OpenWeatherMap)
+    const apiKey = "a58e7680b5a0992b93861fe08764e752"; // Replace with your API key
+    document.getElementById("fetch-btn").addEventListener("click", async () => {
+      const city = document.getElementById("city").value.trim();
+      const output = document.getElementById("weather-output");
+      if (!city) { output.innerHTML = "Please enter a city."; return; }
+      output.innerHTML = "Loading...";
+      try {
+        const res = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`
+        );
+        const data = await res.json();
+        if (data.cod !== 200) throw new Error(data.message);
+
+        output.innerHTML = `
+          <p><strong>${data.name}</strong></p>
+          <p>Temperature: ${data.main.temp}°C</p>
+          <p>Weather: ${data.weather[0].description}</p>
+        `;
+      } catch (err) {
+        output.innerHTML = `Error: ${err.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
